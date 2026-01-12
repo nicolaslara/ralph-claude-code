@@ -1,0 +1,108 @@
+---
+description: Ralph autonomous development with deliberate context management
+globs:
+alwaysApply: true
+---
+
+# Ralph Workflow
+
+This project uses the **Ralph method** for autonomous AI development.
+
+> Progress persists in **files and git**, not in conversation context.
+> When unsure, read project files - they are the source of truth.
+
+## Core Principles
+
+1. **Files are memory** - State lives in files, not conversation history
+2. **Git is long-term memory** - Commits persist progress across sessions
+3. **Tasks are independent** - Select based on state, not fixed order
+4. **Tests are mandatory** - Every task includes testing before completion
+5. **Context is selective** - Load only relevant workpads for current task
+
+## At Session Start
+
+### 1. Read Core Files
+
+```
+.agent/guardrails.md       # Lessons learned - FOLLOW THESE FIRST!
+.agent/progress-current.md # Recent session summaries
+TASK.md                    # Available tasks and completion criteria
+```
+
+### 2. Select a Task
+
+Choose an unchecked `[ ]` task based on:
+- **Dependencies** - What must exist first?
+- **Current state** - What's already built/decided?
+- **Risk** - Tackle uncertain decisions early
+- **Testability** - Prefer tasks with clear verification
+
+### 3. Load Relevant Context
+
+After selecting a task, load only what's needed from `workpads/`:
+
+| Working On | Load These |
+|------------|------------|
+| **Any task** | `workpads/app/knowledge.md` (core decisions) |
+| **UI/Frontend** | + relevant frontend workpad |
+| **Backend/API** | + `workpads/backend/knowledge.md` |
+| **Tests** | + `workpads/testing/knowledge.md` |
+
+## Testing Protocol (CRITICAL)
+
+**Tests are part of every task, not a separate phase.**
+
+Before marking any task `[x]`:
+1. TypeScript passes (if applicable)
+2. Automated tests pass
+3. Manual verification if UI-related
+4. No regressions - existing tests still pass
+
+If tests don't exist, **write them as part of the task**.
+
+## During Work
+
+### Task Execution
+
+1. Work on the selected task
+2. Implement with tests
+3. Verify: tests pass + manual check
+4. Mark complete: `[ ]` → `[x]` in TASK.md
+5. Update `.agent/progress-current.md`
+6. Commit: `git add -A && git commit -m 'project: [what changed]'`
+
+### Adding New Tasks
+
+Add tasks to TASK.md when you discover them:
+- Dependencies or prerequisites
+- Bug fixes, refactoring
+- Performance improvements
+- Documentation needs
+
+## When Something Fails
+
+Add a "Sign" to `.agent/guardrails.md`:
+
+```markdown
+### Sign: [Brief description]
+- **Trigger**: When this situation occurs
+- **Instruction**: What to do instead
+- **Why**: What went wrong
+```
+
+## Signaling (Autonomous Mode)
+
+When running with ralph-orchestrator:
+- **All tasks done**: Output `LOOP_COMPLETE`
+- **Stuck 3+ times**: Output `LOOP_STUCK: [description]`
+
+## File Reference
+
+| File | Purpose | Update When |
+|------|---------|-------------|
+| `TASK.md` | Task list | Mark complete, add new tasks |
+| `PROMPT.md` | Agent instructions | Modify for autonomous behavior |
+| `.agent/progress-current.md` | Session progress | After completing work |
+| `.agent/guardrails.md` | Lessons learned | After failures |
+| `workpads/*/knowledge.md` | Design decisions | After making decisions |
+| `workpads/*/references.md` | External resources | When finding useful links |

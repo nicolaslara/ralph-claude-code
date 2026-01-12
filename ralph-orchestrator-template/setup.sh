@@ -59,6 +59,7 @@ fi
 # Copy template files (excluding setup files themselves)
 echo -e "${GREEN}Copying template files...${NC}"
 cp -r "$SCRIPT_DIR/.agent" "$TARGET_DIR/" 2>/dev/null || true
+cp -r "$SCRIPT_DIR/.cursor" "$TARGET_DIR/" 2>/dev/null || true
 cp -r "$SCRIPT_DIR/workpads" "$TARGET_DIR/" 2>/dev/null || true
 cp "$SCRIPT_DIR/ralph.yml" "$TARGET_DIR/" 2>/dev/null || true
 cp "$SCRIPT_DIR/PROMPT.md" "$TARGET_DIR/" 2>/dev/null || true
@@ -121,6 +122,7 @@ echo "  - Create appropriate workpads for your project"
 echo "  - Populate knowledge.md and references.md files"
 echo "  - Generate initial tasks in TASK.md"
 echo "  - Identify research needed"
+echo "  - Create project-specific Cursor rules (if applicable)"
 echo ""
 echo "  4. Review and commit: git add -A && git commit -m 'Initial project setup'"
 echo "  5. Start ralph: ralph"

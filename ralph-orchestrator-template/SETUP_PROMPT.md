@@ -9,6 +9,7 @@ You are setting up a new project with the ralph-orchestrator template. Read `SET
 3. **Populate initial knowledge** - Document what's known, decisions made, architecture choices
 4. **Identify research needed** - What needs to be investigated before building?
 5. **Create initial tasks** - Setup tasks, research tasks, and first implementation tasks
+6. **Create Cursor rules** - Add project-specific rules for the tech stack
 
 ## Step 1: Analyze the Project
 
@@ -238,7 +239,89 @@ Add any project-specific guardrails based on the tech stack. For example:
 - React Native: "Test on both iOS and Android"
 - APIs: "Never expose secrets in client code"
 
-## Step 8: Commit Everything
+## Step 8: Create Project-Specific Cursor Rules
+
+The template includes base Cursor rules in `.cursor/rules/`:
+- `ralph-workflow.mdc` - Core Ralph workflow (don't modify)
+- `workpads-workflow.mdc` - Workpads usage (don't modify)
+
+**Add project-specific rules** for your tech stack. Create new `.mdc` files:
+
+```markdown
+---
+description: [Brief description of what this rule covers]
+globs:
+alwaysApply: true
+---
+
+# [Rule Name]
+
+[Content specific to your tech stack]
+```
+
+**Common project-specific rules:**
+
+| Tech Stack | Rule File | Content |
+|------------|-----------|---------|
+| React Native/Expo | `expo.mdc` | Expo best practices, component patterns |
+| Solidity | `solidity.mdc` | Security patterns, gas optimization, testing |
+| Next.js | `nextjs.mdc` | App router patterns, server components |
+| Python | `python.mdc` | Type hints, testing, linting standards |
+| Convex | `convex.mdc` | Schema patterns, query/mutation conventions |
+
+**Example for a Solidity project:**
+
+```markdown
+---
+description: Solidity development best practices
+globs:
+alwaysApply: true
+---
+
+# Solidity Rules
+
+## Before Every Commit
+1. Run `forge test` - all tests must pass
+2. Run `slither .` - no high/medium findings
+3. Run `forge snapshot` - check gas changes
+
+## Security Checklist
+- [ ] No external calls before state changes (reentrancy)
+- [ ] Check for overflow in arithmetic (use SafeMath or 0.8+)
+- [ ] Validate all inputs from external sources
+
+## Patterns
+- Use OpenZeppelin contracts where possible
+- Prefer `error` over `require` strings for gas efficiency
+```
+
+**Example for a React Native/Expo project:**
+
+```markdown
+---
+description: Expo and React Native best practices
+globs:
+alwaysApply: true
+---
+
+# Expo Rules
+
+## Testing Requirements
+- Test on both iOS simulator and Android emulator
+- Web can be used for rapid iteration but always verify mobile
+
+## Component Patterns
+- Use NativeWind for styling (Tailwind CSS)
+- Prefer functional components with hooks
+- Use `expo-router` for navigation
+
+## Performance
+- Avoid inline styles in render
+- Use `useMemo` and `useCallback` for expensive operations
+- Prefer FlatList over ScrollView for lists
+```
+
+## Step 9: Commit Everything
 
 After creating all files:
 ```bash

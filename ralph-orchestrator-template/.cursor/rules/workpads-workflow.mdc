@@ -1,0 +1,117 @@
+---
+description: Knowledge bases for persistent project context
+globs:
+alwaysApply: true
+---
+
+# Workpads (Knowledge Bases)
+
+Workpads store **persistent knowledge** that survives across sessions.
+They integrate with the Ralph workflow for context management.
+
+## Structure
+
+```
+workpads/
+├── app/                   # Main application decisions
+│   ├── knowledge.md       # Architecture, design decisions
+│   └── references.md      # External resources
+├── backend/               # Backend services
+│   ├── knowledge.md       # Backend architecture, decisions
+│   └── references.md      # Backend resources
+├── testing/               # Testing strategy
+│   ├── knowledge.md       # Testing practices, decisions
+│   └── references.md      # Testing tools
+└── [domain]/              # Add more as needed
+    ├── knowledge.md
+    └── references.md
+```
+
+## When to Load Workpads
+
+Load **selectively** based on the current task:
+
+| Task Type | Load |
+|-----------|------|
+| **Any task** | `workpads/app/knowledge.md` |
+| **UI work** | + relevant frontend workpad |
+| **Backend work** | + `workpads/backend/knowledge.md` |
+| **Testing** | + `workpads/testing/knowledge.md` |
+
+**Don't load everything** - load what's relevant to your current task.
+
+## When to Update Workpads
+
+### Update knowledge.md when:
+
+- Making an architectural decision
+- Choosing between alternatives (document why)
+- Learning something important about the codebase
+- Resolving an open question
+
+Format for decisions:
+```markdown
+| ID | Decision | Rationale | Date |
+|----|----------|-----------|------|
+| D# | What was decided | Why | YYYY-MM-DD |
+```
+
+### Update references.md when:
+
+- Finding useful external resources
+- A link becomes stale or outdated
+- Noting which references were actually helpful vs not
+
+## Knowledge.md Structure
+
+```markdown
+# [Domain] Knowledge Base
+
+## Table of Contents
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Design Decisions](#design-decisions)
+- [Patterns](#patterns)
+- [Open Questions](#open-questions)
+
+## Overview
+[What this domain covers]
+
+## Architecture
+[High-level architecture, diagrams]
+
+## Design Decisions
+| ID | Decision | Rationale | Date |
+|----|----------|-----------|------|
+
+## Patterns
+[Reusable code patterns with examples]
+
+## Open Questions
+- [ ] [Unresolved question]
+```
+
+## References.md Structure
+
+```markdown
+# [Domain] References
+
+## Quick Navigation
+| Working on... | Consult |
+|---------------|---------|
+
+## [Category]
+| Resource | URL | Purpose |
+|----------|-----|---------|
+
+## Research Needed
+- [ ] [Topic to investigate]
+```
+
+## Citation Format
+
+When referencing workpad content:
+```markdown
+Per workpads/backend/knowledge.md §Design Decisions, we chose...
+See workpads/testing/references.md for testing library docs
+```

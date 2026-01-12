@@ -54,6 +54,7 @@ Claude will:
 - **Populate references.md** with relevant documentation links
 - **Generate TASK.md** with research tasks, setup tasks, and initial features
 - **Add project-specific guardrails** based on your tech stack
+- **Create Cursor rules** for your tech stack (works with both Cursor and Claude Code)
 
 ### Example
 
@@ -148,6 +149,11 @@ your-project/
 │   ├── guardrails.md            # Lessons learned from failures
 │   ├── progress-current.md      # Recent session logs (~10 sessions)
 │   └── progress-archive/        # Rotated older logs
+│
+├── .cursor/rules/               # Cursor IDE rules (also read by Claude Code)
+│   ├── ralph-workflow.mdc       # Core Ralph workflow
+│   ├── workpads-workflow.mdc    # Workpads usage patterns
+│   └── [project-specific].mdc   # Tech stack specific rules
 │
 └── workpads/                    # Project knowledge bases
     ├── app/
