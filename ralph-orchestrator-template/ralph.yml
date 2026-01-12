@@ -1,0 +1,33 @@
+# Ralph Orchestrator Configuration
+# https://github.com/mikeyobrien/ralph-orchestrator
+
+# Agent selection: claude, kiro, q, gemini, acp, auto
+agent: claude
+
+# Task file (contains instructions for each iteration)
+prompt_file: PROMPT.md
+
+# Safety limits
+max_iterations: 50          # Stop after N iterations
+max_runtime: 14400          # 4 hours max
+max_tokens: 1000000         # Token budget across all iterations
+max_cost: 25.0              # USD spending limit
+
+# Completion detection
+completion_promise: LOOP_COMPLETE
+
+# Git integration
+checkpoint_interval: 5       # Git checkpoint every N iterations
+
+# Retry behavior
+retry_delay: 2               # Seconds between retries on failure
+max_consecutive_errors: 5    # Stop after N consecutive failures
+
+# Logging
+verbose: true
+
+# Adapter-specific settings
+adapters:
+  claude:
+    timeout: 300             # 5 minutes per iteration
+    model: claude-sonnet-4-20250514  # or claude-opus-4-20250514 for complex tasks

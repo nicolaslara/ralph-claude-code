@@ -1,4 +1,9 @@
-# Ignore local testing artifacts
+# OS
 .DS_Store
-*.log
 
+# Editor
+.vscode/
+.idea/
+
+# Claude Code local state
+.claude/

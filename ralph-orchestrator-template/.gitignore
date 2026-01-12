@@ -1,0 +1,12 @@
+# Ralph state (transient only)
+.agent/activity.log
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Dependencies (if applicable)
+node_modules/
