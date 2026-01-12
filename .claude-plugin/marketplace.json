@@ -1,0 +1,15 @@
+{
+  "name": "ralph-marketplace",
+  "description": "Ralph Wiggum plugins for Claude Code",
+  "author": {
+    "name": "Nicolas Lara",
+    "url": "https://github.com/nicolaslara"
+  },
+  "plugins": [
+    {
+      "name": "ralph",
+      "description": "Autonomous development loop with guardrails and safety checks",
+      "path": "."
+    }
+  ]
+}

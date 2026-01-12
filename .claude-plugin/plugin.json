@@ -1,0 +1,20 @@
+{
+  "name": "ralph",
+  "version": "1.0.0",
+  "description": "Ralph Wiggum autonomous development loop with guardrails, safety checks, and activity logging",
+  "author": {
+    "name": "Nicolas Lara",
+    "url": "https://github.com/nicolaslara"
+  },
+  "repository": "https://github.com/nicolaslara/ralph-claude-code",
+  "license": "MIT",
+  "keywords": [
+    "ralph",
+    "ralph-wiggum",
+    "autonomous",
+    "loop",
+    "development",
+    "guardrails"
+  ],
+  "hooks": "./hooks/hooks.json"
+}
