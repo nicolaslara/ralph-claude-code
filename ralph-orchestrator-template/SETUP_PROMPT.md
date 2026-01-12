@@ -188,10 +188,11 @@ These workpads are relevant to most tasks:
 
 Create the initial task list with:
 
-1. **Research tasks** (P0) - Things that need investigation before building
-2. **Setup tasks** (P0) - Project scaffolding, tooling, CI
-3. **Core feature tasks** (P1) - Main functionality
-4. **Polish tasks** (P2) - Nice to have, optimization
+1. **MCP/Plugin setup** (P0) - Configure IDE tooling for the project
+2. **Research tasks** (P0) - Things that need investigation before building
+3. **Setup tasks** (P0) - Project scaffolding, tooling, CI
+4. **Core feature tasks** (P1) - Main functionality
+5. **Polish tasks** (P2) - Nice to have, optimization
 
 ```markdown
 # Tasks
@@ -202,6 +203,11 @@ Create the initial task list with:
 - Select tasks based on dependencies and current state
 
 ---
+
+## P0 - MCP & Plugin Setup
+
+- [ ] Configure MCP servers in `.mcp.json` for project tooling
+- [ ] Set up Cursor MCP in `.cursor/mcp.json` (if needed)
 
 ## P0 - Research (do first)
 
@@ -229,6 +235,58 @@ Create the initial task list with:
 ## Discovered During Work
 
 <!-- Add tasks here as you find them -->
+```
+
+### MCP Server Reference
+
+**Always include relevant MCP servers** based on the tech stack:
+
+| Tech Stack | MCP Server | Config |
+|------------|------------|--------|
+| Convex | `convex` | `npx -y convex@latest mcp start` |
+| Supabase | `supabase` | `npx -y @supabase/mcp-server` |
+| PostgreSQL | `postgres` | `npx -y @modelcontextprotocol/server-postgres` |
+| Firebase | `firebase` | Check for official MCP |
+| Maestro (E2E) | `maestro` | `maestro mcp --working-dir=<path>` |
+| Puppeteer | `puppeteer` | `npx -y @anthropic/mcp-puppeteer` |
+| Playwright | `playwright` | `npx -y @anthropic/mcp-playwright` |
+| GitHub | `github` | `npx -y @anthropic/mcp-github` |
+| Filesystem | `filesystem` | `npx -y @anthropic/mcp-filesystem <paths>` |
+
+**Example `.mcp.json` for a Convex + Maestro project:**
+```json
+{
+  "mcpServers": {
+    "convex": {
+      "command": "npx",
+      "args": ["-y", "convex@latest", "mcp", "start"]
+    },
+    "maestro": {
+      "command": "maestro",
+      "args": ["mcp", "--working-dir", "./apps/mobile"]
+    }
+  }
+}
+```
+
+**Example for a Supabase + Playwright project:**
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_SERVICE_KEY": "${SUPABASE_SERVICE_KEY}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-playwright"]
+    }
+  }
+}
 ```
 
 ## Step 7: Update .agent/guardrails.md
